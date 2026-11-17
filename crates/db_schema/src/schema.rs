@@ -624,6 +624,21 @@ diesel::table! {
 }
 
 diesel::table! {
+    passport_account (id) {
+        id -> Int4,
+        local_user_id -> Int4,
+        identifier -> Text,
+    }
+}
+
+diesel::table! {
+    passport_nonce (nonce) {
+        nonce -> Text,
+        published_at -> Timestamptz,
+    }
+}
+
+diesel::table! {
     person (id) {
         id -> Int4,
         #[max_length = 255]
@@ -1008,6 +1023,7 @@ diesel::joinable!(mod_remove_post -> person (mod_person_id));
 diesel::joinable!(mod_remove_post -> post (post_id));
 diesel::joinable!(mod_transfer_community -> community (community_id));
 diesel::joinable!(password_reset_request -> local_user (local_user_id));
+diesel::joinable!(passport_account -> local_user (local_user_id));
 diesel::joinable!(person -> instance (instance_id));
 diesel::joinable!(person_aggregates -> person (person_id));
 diesel::joinable!(person_ban -> person (person_id));
@@ -1089,6 +1105,8 @@ diesel::allow_tables_to_appear_in_same_query!(
     mod_remove_post,
     mod_transfer_community,
     password_reset_request,
+    passport_account,
+    passport_nonce,
     person,
     person_aggregates,
     person_ban,

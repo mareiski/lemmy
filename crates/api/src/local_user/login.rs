@@ -80,7 +80,7 @@ pub async fn login(
   }))
 }
 
-async fn check_registration_application(
+pub(super) async fn check_registration_application(
   local_user_view: &LocalUserView,
   local_site: &LocalSite,
   pool: &mut DbPool<'_>,

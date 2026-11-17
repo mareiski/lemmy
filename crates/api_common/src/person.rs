@@ -31,6 +31,15 @@ pub struct Login {
   pub totp_2fa_token: Option<String>,
 }
 
+/// Data submitted after a Passport proof has been generated.
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct PassportLogin {
+  pub proofs: serde_json::Value,
+  #[serde(rename = "queryResult")]
+  pub query_result: serde_json::Value,
+  pub nonce: String,
+}
+
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize, Clone, Default, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "full", derive(TS))]

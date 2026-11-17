@@ -32,6 +32,8 @@ use lemmy_api::{
     list_logins::list_logins,
     list_media::list_media,
     login::login,
+    passport_login::passport_login,
+    passport_nonce::passport_nonce,
     logout::logout,
     notifications::{
       list_mentions::list_mentions,
@@ -387,6 +389,13 @@ pub fn config(cfg: &mut web::ServiceConfig, rate_limit: &RateLimitCell) {
           .route("", web::put().to(update_custom_emoji))
           .route("/delete", web::post().to(delete_custom_emoji)),
       ),
+  );
+  // Custom Passport login endpoints used by Photon. The regular Lemmy API remains v3.
+  cfg.service(
+    web::scope("/api/v4/account/auth/passport")
+      .wrap(rate_limit.register())
+      .route("/nonce", web::get().to(passport_nonce))
+      .route("/login", web::post().to(passport_login)),
   );
   cfg.service(
     web::scope("/sitemap.xml")

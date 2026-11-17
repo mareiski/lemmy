@@ -13,6 +13,8 @@ pub mod list_banned;
 pub mod list_logins;
 pub mod list_media;
 pub mod login;
+pub mod passport_login;
+pub mod passport_nonce;
 pub mod logout;
 pub mod notifications;
 pub mod report_count;

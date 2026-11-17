@@ -33,6 +33,10 @@ RUN --mount=type=cache,target=/lemmy/target set -ex; \
         mv target/"${RUST_RELEASE_MODE}"/lemmy_server ./lemmy_server; \
     fi
 
+# cargo-chef compiles placeholder workspace sources while warming the dependency cache.
+# Clear the placeholder server target before building the real source tree.
+RUN cargo clean -p lemmy_server
+
 # Release build
 RUN --mount=type=cache,target=/lemmy/target set -ex; \
     if [ "${RUST_RELEASE_MODE}" = "release" ]; then \

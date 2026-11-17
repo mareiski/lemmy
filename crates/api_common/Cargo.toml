@@ -48,6 +48,7 @@ lemmy_db_schema = { workspace = true }
 lemmy_utils = { workspace = true }
 activitypub_federation = { workspace = true, optional = true }
 serde = { workspace = true }
+serde_json = { workspace = true }
 serde_with = { workspace = true }
 url = { workspace = true }
 chrono = { workspace = true }
